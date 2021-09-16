@@ -16,35 +16,47 @@
 #include QMK_KEYBOARD_H
 
 
-// Left-hand home row mods
+// Left-hand home row mods qwerty
 #define GUI_A LGUI_T(KC_A)
 #define ALT_S LALT_T(KC_S)
 #define SFT_D LSFT_T(KC_D)
-#define CTL_F LCTL_T(KC_F)
+#define CTR_F LCTL_T(KC_F)
 
-// Right-hand home row mods
-#define CTL_J RCTL_T(KC_J)
+// Right-hand home row mods qwerty
+#define CTR_J RCTL_T(KC_J)
 #define SFT_K RSFT_T(KC_K)
 #define ALT_L LALT_T(KC_L)
-#define GUI_SCLN RGUI_T(KC_SCLN)
+#define GUI_SCLN LGUI_T(KC_SCLN)
 
+
+// Left-hand home row mods colemak
+#define GUI_A LGUI_T(KC_A)
+#define ALT_R LALT_T(KC_R)
+#define SFT_S LSFT_T(KC_S)
+#define CTR_T LCTL_T(KC_T)
+
+// Right-hand home row mods colemak
+#define CTR_N RCTL_T(KC_N)
+#define SFT_E RSFT_T(KC_E)
+#define ALT_I LALT_T(KC_I)
+#define GUI_O LGUI_T(KC_O)
 
 enum layers {
     _QWERTY = 0,
-    _DVORAK,
     _COLEMAK_DH,
     _NAV,
     _SYM,
-    _NUM,
     _FUNCTION,
     _ADJUST,
+    _NUM,
+    _GAMING
 };
 
 
 // Aliases for readability
 #define QWERTY   DF(_QWERTY)
 #define COLEMAK  DF(_COLEMAK_DH)
-#define DVORAK   DF(_DVORAK)
+#define GAMING   DF(_GAMING)
 
 #define SYM      MO(_SYM)
 #define NAV      MO(_NAV)
@@ -79,30 +91,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_QWERTY] = LAYOUT(
      KC_ESC  , KC_Q ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T ,                                        KC_Y,   KC_U ,  KC_I ,   KC_O ,  KC_P  , KC_BSPC,
-     KC_TAB , GUI_A, ALT_S   , SFT_D  ,  CTL_F ,   KC_G ,                                        KC_H,   CTL_J, SFT_K ,  ALT_L ,GUI_SCLN,CTL_QUOT,
-     CTL_ESC , KC_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , KC_LBRC,KC_CAPS,     FKEYS  , KC_RBRC, KC_N,   KC_M ,KC_COMM, KC_DOT ,KC_SLSH , ALT_ENT,
-                                ADJUST , NUM, KC_SPC, KC_LSFT , NAV   ,     SYM    , KC_BSPC ,KC_RALT, KC_RGUI, KC_APP
-    ),
-
-/*
- * Base Layer: Dvorak
- *
- * ,-------------------------------------------.                              ,-------------------------------------------.
- * |  Tab   | ' "  | , <  | . >  |   P  |   Y  |                              |   F  |   G  |   C  |   R  |   L  |  Bksp  |
- * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |Ctrl/Esc|   A  |   O  |   E  |   U  |   I  |                              |   D  |   H  |   T  |   N  |   S  |Ctrl/- _|
- * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LShift | ; :  |   Q  |   J  |   K  |   X  | [ {  |CapsLk|  |F-keys|  ] } |   B  |   M  |   W  |   V  |   Z  | RShift |
- * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |Adjust| LGUI | LAlt/| Space| Nav  |  | Sym  | Space| AltGr| RGUI | Menu |
- *                        |      |      | Enter|      |      |  |      |      |      |      |      |
- *                        `----------------------------------'  `----------------------------------'
- */
-    [_DVORAK] = LAYOUT(
-     KC_TAB  ,KC_QUOTE,KC_COMM,  KC_DOT,   KC_P ,   KC_Y ,                                        KC_F,   KC_G ,  KC_C ,   KC_R ,  KC_L , KC_BSPC,
-     CTL_ESC , KC_A ,  KC_O   ,  KC_E  ,   KC_U ,   KC_I ,                                        KC_D,   KC_H ,  KC_T ,   KC_N ,  KC_S , CTL_MINS,
-     KC_LSFT ,KC_SCLN, KC_Q   ,  KC_J  ,   KC_K ,   KC_X , KC_LBRC,KC_CAPS,     FKEYS  , KC_RBRC, KC_B,   KC_M ,  KC_W ,   KC_V ,  KC_Z , KC_RSFT,
-                                 ADJUST, KC_LGUI, ALT_ENT, KC_SPC , NAV   ,     SYM    , KC_SPC ,KC_RALT, KC_RGUI, KC_APP
+     KC_TAB , GUI_A, ALT_S   , SFT_D   ,  CTR_F ,   KC_G ,                                        KC_H,   CTR_J, SFT_K ,  ALT_L ,GUI_SCLN,CTL_QUOT,
+     CTL_ESC , KC_Z ,  KC_X   ,  KC_C  ,  KC_V ,   KC_B  , KC_LBRC, KC_ENT,     FKEYS  , KC_RBRC ,KC_N,   KC_M ,KC_COMM, KC_DOT ,KC_SLSH , ALT_ENT,
+                                ADJUST ,  NUM  , KC_LSFT , KC_SPC ,  NAV  ,     SYM    , KC_BSPC ,KC_RALT, KC_RGUI, KC_APP
     ),
 
 /*
@@ -120,10 +111,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_COLEMAK_DH] = LAYOUT(
-     KC_TAB  , KC_Q ,  KC_W   ,  KC_F  ,   KC_P ,   KC_B ,                                        KC_J,   KC_L ,  KC_U ,   KC_Y ,KC_SCLN, KC_BSPC,
-     CTL_ESC , KC_A ,  KC_R   ,  KC_S  ,   KC_T ,   KC_G ,                                        KC_M,   KC_N ,  KC_E ,   KC_I ,  KC_O , CTL_QUOT,
-     KC_LSFT , KC_Z ,  KC_X   ,  KC_C  ,   KC_D ,   KC_V , KC_LBRC,KC_CAPS,     FKEYS  , KC_RBRC, KC_K,   KC_H ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
-                                 ADJUST, KC_LGUI, ALT_ENT, KC_SPC , NAV   ,     SYM    , KC_SPC ,KC_RALT, KC_RGUI, KC_APP
+     KC_ESC , KC_Q ,  KC_W   ,  KC_F  ,   KC_P ,   KC_B ,                                        KC_J,   KC_L ,  KC_U ,   KC_Y ,KC_SCLN, KC_BSPC,
+     KC_TAB , GUI_A,  ALT_R  ,  SFT_S ,  CTR_T ,   KC_G ,                                        KC_M,  CTR_N , SFT_E ,  ALT_I , GUI_O , CTL_QUOT,
+     KC_ENT , KC_X ,  KC_C   ,  KC_D  ,   KC_V ,   KC_Z , KC_LBRC, KC_ENT,     FKEYS  , KC_RBRC, KC_K,   KC_H ,KC_COMM, KC_DOT ,KC_SLSH,  ALT_ENT,
+                                 ADJUST ,  NUM  , KC_LSFT , KC_SPC ,  NAV  ,     SYM    , KC_BSPC ,KC_RALT, KC_RGUI, KC_APP
     ),
 
 /*
@@ -226,10 +217,33 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_ADJUST] = LAYOUT(
       _______, _______, _______, QWERTY , _______, _______,                                    _______, _______, _______, _______,  _______, _______,
-      _______, _______, _______, DVORAK , _______, _______,                                    RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI,  RGB_MOD, _______,
+      _______, _______, _______, _______, _______, GAMING ,                                    RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI,  RGB_MOD, _______,
       _______, _______, _______, COLEMAK, _______, _______,_______, _______, _______, _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD, _______,
                                  _______, _______, _______,_______, _______, _______, _______, _______, _______, _______
     ),
+
+
+/*
+ * Layer template
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |        |      |      |      |      |      |                              |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |                              |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      |        |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        |      |      |      |      |      |  |      |      |      |      |      |
+ *                        |      |      |      |      |      |  |      |      |      |      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
+    [_GAMING] = LAYOUT(
+      KC_TAB ,   KC_1 ,   KC_2 ,  KC_3  ,  KC_4  ,  KC_5 ,                                     _______, _______, _______, _______, _______, _______,
+      KC_ESC , KC_LSFT,   KC_A ,  KC_W  ,  KC_D  ,  KC_Q ,                                     _______, _______, _______, _______, _______, _______,
+      KC_ENT , KC_LCTL,   KC_X ,  KC_S  ,  KC_Q  ,  KC_M ,   KC_F , KC_ENT , _______, _______, _______, _______, _______, _______, _______, _______,
+                                ADJUST  ,  NUM   ,  KC_E , KC_SPC ,   NAV  , _______, _______, _______, _______, _______
+    ),
+
 
 // /*
 //  * Layer template
@@ -252,3 +266,49 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 //     ),
 };
+
+#ifdef OLED_ENABLE
+
+
+static void render_status(void) {
+
+    // Host Keyboard Layer Status
+    oled_write_P(PSTR("Layer: "), false);
+      switch (get_highest_layer(layer_state | default_layer_state)) {
+            case 0:
+                oled_write_P(PSTR("QWERTY\n"), false);
+                break;
+            case 1:
+                oled_write_P(PSTR("Colemak-DH\n"), false);
+                break;
+            case 2:
+                oled_write_P(PSTR("Nav\n"), false);
+                break;
+            case 3:
+                oled_write_P(PSTR("Sym\n"), false);
+                break;
+            case 4:
+                oled_write_P(PSTR("Function\n"), false);
+                break;
+            case 5:
+                oled_write_P(PSTR("Adjust\n"), false);
+                break;
+            case 6:
+                oled_write_P(PSTR("Numpad\n"), false);
+                break;
+            case 7:
+                oled_write_P(PSTR("Gaming\n"), false);
+                break;
+            default:
+                oled_write_P(PSTR("Undefined\n"), false);
+        }
+
+}
+
+void oled_task_user(void) {
+    if (is_keyboard_master()) {
+        render_status();  // Renders the current keyboard state (layer, lock, caps, scroll, etc)
+    }
+}
+
+#endif
