@@ -31,35 +31,41 @@
 
 // Left-hand home row mods colemak
 #define GUI_A LGUI_T(KC_A)
+#define CTR_A LCTL_T(KC_A)
 #define ALT_R LALT_T(KC_R)
 #define SFT_S LSFT_T(KC_S)
 #define CTR_T LCTL_T(KC_T)
+#define GIU_T LGUI_T(KC_T)
 
 // Right-hand home row mods colemak
 #define CTR_N RCTL_T(KC_N)
+#define GUI_N LGUI_T(KC_N)
 #define SFT_E RSFT_T(KC_E)
 #define ALT_I LALT_T(KC_I)
 #define GUI_O LGUI_T(KC_O)
+#define CTR_O LCTL_T(KC_O)
 
 enum layers {
-    _QWERTY = 0,
     _COLEMAK_DH,
+    _COLEMAK_DH_OSX,
     _NAV,
     _SYM,
     _FUNCTION,
     _ADJUST,
     _NUM,
-    _GAMING
+    _GAMING,
+    _CODE
 };
 
 
 // Aliases for readability
-#define QWERTY   DF(_QWERTY)
 #define COLEMAK  DF(_COLEMAK_DH)
+#define CMK_OSX  DF(_COLEMAK_DH_OSX)
 #define GAMING   DF(_GAMING)
 
 #define SYM      MO(_SYM)
 #define NAV      MO(_NAV)
+#define CODE     MO(_CODE)
 #define NUM      MO(_NUM)
 #define FKEYS    MO(_FUNCTION)
 #define ADJUST   MO(_ADJUST)
@@ -69,32 +75,19 @@ enum layers {
 #define CTL_MINS MT(MOD_RCTL, KC_MINUS)
 #define ALT_ENT  MT(MOD_LALT, KC_ENT)
 
+
+#define KC_MOR  LCTL(KC_DOT)
+#define KC_LSS  LCTL(KC_COMM)
+
+
+
 // Note: LAlt/Enter (ALT_ENT) is not the same thing as the keyboard shortcut Alt+Enter.
 // The notation `mod/tap` denotes a key that activates the modifier `mod` when held down, and
 // produces the key `tap` when tapped (i.e. pressed and released).
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-/*
- * Base Layer: QWERTY
- *
- * ,-------------------------------------------.                              ,-------------------------------------------.
- * |  Tab   |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  Bksp  |
- * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |Ctrl/Esc|   A  |   S  |   D  |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |Ctrl/' "|
- * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |   C  |   V  |   B  | [ {  |CapsLk|  |F-keys|  ] } |   N  |   M  | ,  < | . >  | /  ? | RShift |
- * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |Adjust| LGUI | LAlt/| Space| Nav  |  | Sym  | Space| AltGr| RGUI | Menu |
- *                        |      |      | Enter|      |      |  |      |      |      |      |      |
- *                        `----------------------------------'  `----------------------------------'
- */
-    [_QWERTY] = LAYOUT(
-     KC_ESC  , KC_Q ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T ,                                        KC_Y,   KC_U ,  KC_I ,   KC_O ,  KC_P  , KC_BSPC,
-     KC_TAB , GUI_A,  ALT_S   , SFT_D   ,  CTR_F ,   KC_G ,                                        KC_H,   CTR_J, SFT_K ,  ALT_L ,GUI_SCLN,CTL_QUOT,
-     CTL_ESC , KC_Z ,  KC_X   ,  KC_C  ,  KC_V ,   KC_B  , KC_LBRC, KC_ENT,     FKEYS  , KC_RBRC ,KC_N,   KC_M ,KC_COMM, KC_DOT ,KC_SLSH , ALT_ENT,
-                                ADJUST ,  NUM  , KC_LSFT , KC_SPC ,  NAV  ,     SYM    , KC_BSPC ,KC_RALT, KC_RGUI, KC_LGUI
-    ),
+
 
 /*
  * Base Layer: Colemak DH
@@ -111,11 +104,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_COLEMAK_DH] = LAYOUT(
-     KC_ESC , KC_Q ,  KC_W   ,  KC_F  ,   KC_P ,   KC_B ,                                        KC_J,   KC_L ,  KC_U ,   KC_Y ,KC_SCLN, KC_BSPC,
-     KC_TAB , GUI_A,  ALT_R  ,  SFT_S ,  CTR_T ,   KC_G ,                                        KC_M,  CTR_N , SFT_E ,  ALT_I , GUI_O , CTL_QUOT,
-     KC_ENT , KC_Z ,  KC_X   ,  KC_C  ,  KC_D  ,   KC_V , KC_LBRC, KC_ENT,  FKEYS  , KC_RBRC, KC_K,   KC_H ,KC_COMM, KC_DOT ,KC_SLSH,  ALT_ENT,
-                                 ADJUST ,  NUM  ,KC_LSFT, KC_SPC ,  NAV  ,  SYM    , KC_BSPC ,KC_RALT, KC_RGUI, KC_LGUI
+     KC_ESC  , KC_Q   , KC_W   , KC_F   , KC_P   , KC_B   ,                                      KC_J  , KC_L   , KC_U   , KC_Y   , KC_SCLN, KC_BSPC,
+     KC_TAB  , CTR_A  , ALT_R  , SFT_S  , GIU_T  , KC_G   ,                                      KC_M  , GUI_N  , SFT_E  , ALT_I  , CTR_O  , KC_QUOT,
+     KC_ENT  , KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , KC_LBRC, KC_BSPC, KC_BSPC , KC_RBRC, KC_K  , KC_H   , KC_COMM, KC_DOT , KC_SLSH, KC_ENT ,
+                                 ADJUST , NAV    , NUM    , KC_SPC , CODE   , KC_ENT  , KC_RALT, FKEYS , SYM    , KC_LGUI
     ),
+
+		[_COLEMAK_DH_OSX] = LAYOUT(
+     KC_ESC  , KC_Q   , KC_W   , KC_F   , KC_P   , KC_B   ,                                      KC_J  , KC_L   , KC_U   , KC_Y   , KC_SCLN, KC_BSPC,
+     KC_TAB  , GUI_A  , ALT_R  , SFT_S  , CTR_T  , KC_G   ,                                      KC_M  , CTR_N  , SFT_E  , ALT_I  , GUI_O  , KC_QUOT,
+     KC_ENT  , KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , KC_LBRC, KC_BSPC, KC_BSPC , KC_RBRC, KC_K  , KC_H   , KC_COMM, KC_DOT , KC_SLSH, KC_ENT ,
+                                 ADJUST , NAV    , NUM    , KC_SPC , CODE   , KC_ENT  , KC_RALT, FKEYS , SYM    , KC_LGUI
+    ),
+
+
 
 /*
  * Nav Layer: Media, navigation
@@ -159,6 +161,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 
+// /*
+//  * Layer template
+//  *
+//  * ,-------------------------------------------.                              ,-------------------------------------------.
+//  * |        |      |      |      |      |      |                              |      |      |      |      |      |        |
+//  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+//  * |        |      |      |      |      |      |                              |      |      |      |      |      |        |
+//  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+//  * |        |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      |        |
+//  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+//  *                        |      |      |      |      |      |  |      |      |      |      |      |
+//  *                        |      |      |      |      |      |  |      |      |      |      |      |
+//  *                        `----------------------------------'  `----------------------------------'
+//  */
+    [_CODE] = LAYOUT(
+      KC_ASTR, KC_QUES, KC_BSLS, KC_AMPR, KC_PIPE, KC_SLSH,                                     _______, KC_LCBR, KC_RCBR, _______, _______, KC_BSPC,
+      KC_PLUS, KC_EXLM, KC_MOR , KC_MINS, KC_EQL , KC_LSS ,                                     _______, KC_LPRN, KC_RPRN, _______, _______, KC_TAB ,
+      KC_HASH, KC_DOT , KC_COLN, KC_UNDS, KC_SCLN, KC_COMM, _______, _______, _______, _______, _______, KC_LBRC, KC_RBRC, _______, _______, KC_ENT ,
+                                 _______, _______, KC_TAB , KC_SPC , _______, _______, _______, _______, _______, _______
+    ),
     /*
  * Num Layer: Numbers and symbols
  *
@@ -174,10 +196,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_NUM] = LAYOUT(
-      _______, _______, _______, _______, _______, _______,                                     KC_7, KC_8, KC_9, KC_EQL, _______, KC_BSPC,
-      _______, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _______,                                     KC_4, KC_5, KC_6, KC_PLUS, _______, KC_DEL,
-      _______, _______, _______, _______, _______, _______, _______, KC_SLCK, _______, _______, KC_1, KC_2, KC_3, KC_SLSH, _______, KC_ENT,
-                                 _______, _______, _______, _______, _______, _______, KC_COMM, KC_DOT, KC_0, _______
+      _______, _______, _______, _______, _______, _______,                                     _______, KC_P7, KC_P8, KC_P9, KC_EQL , KC_BSPC,
+      _______, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _______,                                     _______, KC_P4, KC_P5, KC_P6, KC_PLUS,  KC_DEL,
+      _______, _______, _______, _______, _______, _______, _______, KC_SLCK, _______, _______, _______, KC_P1, KC_P2, KC_P3, KC_SLSH,  KC_ENT,
+                                 _______, _______, _______, _______, _______, KC_NLCK, KC_COMM, KC_P0, KC_DOT,  _______
     ),
 
 /*
@@ -216,9 +238,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_ADJUST] = LAYOUT(
-      _______, _______, _______, QWERTY , _______, _______,                                    _______, _______, _______, _______,  _______, _______,
-      _______, _______, _______, _______, _______, GAMING ,                                    RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI,  RGB_MOD, _______,
-      _______, _______, _______, COLEMAK, _______, _______,_______, _______, _______, _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD, _______,
+      _______, _______, _______, COLEMAK, CMK_OSX, GAMING ,                                    _______, _______, _______, _______,  _______, _______,
+      _______, _______, _______, _______, _______, _______,                                    RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI,  RGB_MOD, _______,
+      _______, _______, _______, _______, _______, _______,_______, _______, _______, _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD, _______,
                                  _______, _______, _______,_______, _______, _______, _______, _______, _______, _______
     ),
 
@@ -238,10 +260,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_GAMING] = LAYOUT(
-      KC_TAB ,   KC_1 ,   KC_2 ,  KC_3  ,  KC_4  ,  KC_5 ,                                     _______, _______, _______, _______, _______, _______,
-      KC_ESC , KC_LSFT,   KC_A ,  KC_W  ,  KC_D  ,  KC_Q ,                                     _______, _______, _______, _______, _______, _______,
-      KC_ENT , KC_LCTL,   KC_X ,  KC_S  ,  KC_Q  ,  KC_M ,   KC_F , KC_ENT , _______, _______, _______, _______, _______, _______, _______, _______,
-                                ADJUST  ,  NUM   ,  KC_E , KC_SPC ,   NAV  , _______, _______, _______, _______, _______
+      KC_TAB ,   KC_1 ,   KC_2 ,  KC_3  ,  KC_4  ,  KC_5 ,                                     _______, _______, _______, _______, _______, COLEMAK,
+      KC_ESC , KC_LSFT,   KC_A ,  KC_W  ,  KC_D  ,  KC_Q ,                                     _______, _______, _______, _______, _______, CMK_OSX,
+      KC_ENT , KC_LCTL,   KC_X ,  KC_S  ,  KC_Q  ,  KC_M ,   KC_F , KC_ENT , _______, _______, _______, _______, _______, _______, _______, KC_ENT ,
+                                ADJUST  ,  NUM   , KC_SPC,   NAV  , KC_ENT , FKEYS  ,   SYM  , KC_ENT , KC_RALT, KC_LGUI
     ),
 
 
@@ -270,71 +292,94 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef OLED_ENABLE
 
 
-static void render_status(void) {
-    static const char PROGMEM qmk_logo[] = {
-        0x80,0x81,0x82,0x83,0x84,0x85,0x86,0x87,0x88,0x89,0x8a,0x8b,0x8c,0x8d,0x8e,0x8f,0x90,0x91,0x92,0x93,0x94,
-        0xa0,0xa1,0xa2,0xa3,0xa4,0xa5,0xa6,0xa7,0xa8,0xa9,0xaa,0xab,0xac,0xad,0xae,0xaf,0xb0,0xb1,0xb2,0xb3,0xb4,
-        0xc0,0xc1,0xc2,0xc3,0xc4,0xc5,0xc6,0xc7,0xc8,0xc9,0xca,0xcb,0xcc,0xcd,0xce,0xcf,0xd0,0xd1,0xd2,0xd3,0xd4,0};
-    // clang-format on
+static const char PROGMEM qmk_logo[] = {
+  0x80,0x81,0x82,0x83,0x84,0x85,0x86,0x87,0x88,0x89,0x8a,0x8b,0x8c,0x8d,0x8e,0x8f,0x90,0x91,0x92,0x93,0x94,
+  0xa0,0xa1,0xa2,0xa3,0xa4,0xa5,0xa6,0xa7,0xa8,0xa9,0xaa,0xab,0xac,0xad,0xae,0xaf,0xb0,0xb1,0xb2,0xb3,0xb4,
+  0xc0,0xc1,0xc2,0xc3,0xc4,0xc5,0xc6,0xc7,0xc8,0xc9,0xca,0xcb,0xcc,0xcd,0xce,0xcf,0xd0,0xd1,0xd2,0xd3,0xd4,0
+};
 
+static void render_led(void) {
+  led_t led_usb_state = host_keyboard_led_state();
+  oled_write_P(led_usb_state.num_lock    ? PSTR("NUMLCK ") : PSTR("       "), false);
+  oled_write_P(led_usb_state.caps_lock   ? PSTR("CAPLCK ") : PSTR("       "), false);
+  oled_write_P(led_usb_state.scroll_lock ? PSTR("SCRLCK ") : PSTR("       "), false);
+}
+
+static void render_alt(void) {
+  oled_write_P(qmk_logo, false);
+  oled_write_P(PSTR("AvelK\n\n"), false);
+  render_led();
+}
+static void render_status(void) {
+
+    
+    // clang-format on
     oled_write_P(qmk_logo, false);
-    oled_write_P(PSTR("Kyria rev1.0\n\n"), false);
+    oled_write_P(PSTR("Kyria\n\n"), false);
     // Host Keyboard Layer Status
+  
     oled_write_P(PSTR("Layer: "), false);
     switch (get_highest_layer(layer_state | default_layer_state)) {
-        case 0:
-            oled_write_P(PSTR("QWERTY\n"), false);
+        case _COLEMAK_DH:
+            oled_write_P(PSTR("Cmk-DH Lnx/win\n"), false);
             break;
-        case 1:
-            oled_write_P(PSTR("Colemak-DH\n"), false);
+				case _COLEMAK_DH_OSX:
+            oled_write_P(PSTR("Cmk-dh OsX\n"), false); 
             break;
-        case 2:
+        case _NAV:
             oled_write_P(PSTR("Nav\n"), false);
             break;
-        case 3:
-            oled_write_P(PSTR("Sym\n"), false);
+        case _SYM:
+            oled_write_P(PSTR("Symbols\n"), false);
             break;
-        case 4:
+        case _FUNCTION:
             oled_write_P(PSTR("Function\n"), false);
             break;
-        case 5:
+        case _ADJUST:
             oled_write_P(PSTR("Adjust\n"), false);
             break;
-        case 6:
+        case _NUM:
             oled_write_P(PSTR("Numpad\n"), false);
             break;
-        case 7:
+				case _GAMING:
             oled_write_P(PSTR("Gaming\n"), false);
             break;
+        case _CODE:
+          oled_write_P(PSTR("Code Symbols\n"), false);
+          break;
         default:
             oled_write_P(PSTR("Undefined\n"), false);
     }
 
-}
-
-static void render_kyria(void) {
-    // clang-format off
-    static const char PROGMEM kyria_logo[] = {
-        0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,128,128,192,224,240,112,120, 56, 60, 28, 30, 14, 14, 14,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7, 14, 14, 14, 30, 28, 60, 56,120,112,240,224,192,128,128,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-        0,  0,  0,  0,  0,  0,  0,192,224,240,124, 62, 31, 15,  7,  3,  1,128,192,224,240,120, 56, 60, 28, 30, 14, 14,  7,  7,135,231,127, 31,255,255, 31,127,231,135,  7,  7, 14, 14, 30, 28, 60, 56,120,240,224,192,128,  1,  3,  7, 15, 31, 62,124,240,224,192,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-        0,  0,  0,  0,240,252,255, 31,  7,  1,  0,  0,192,240,252,254,255,247,243,177,176, 48, 48, 48, 48, 48, 48, 48,120,254,135,  1,  0,  0,255,255,  0,  0,  1,135,254,120, 48, 48, 48, 48, 48, 48, 48,176,177,243,247,255,254,252,240,192,  0,  0,  1,  7, 31,255,252,240,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-        0,  0,  0,255,255,255,  0,  0,  0,  0,  0,254,255,255,  1,  1,  7, 30,120,225,129,131,131,134,134,140,140,152,152,177,183,254,248,224,255,255,224,248,254,183,177,152,152,140,140,134,134,131,131,129,225,120, 30,  7,  1,  1,255,255,254,  0,  0,  0,  0,  0,255,255,255,  0,  0,  0,  0,255,255,  0,  0,192,192, 48, 48,  0,  0,240,240,  0,  0,  0,  0,  0,  0,240,240,  0,  0,240,240,192,192, 48, 48, 48, 48,192,192,  0,  0, 48, 48,243,243,  0,  0,  0,  0,  0,  0, 48, 48, 48, 48, 48, 48,192,192,  0,  0,  0,  0,  0,
-        0,  0,  0,255,255,255,  0,  0,  0,  0,  0,127,255,255,128,128,224,120, 30,135,129,193,193, 97, 97, 49, 49, 25, 25,141,237,127, 31,  7,255,255,  7, 31,127,237,141, 25, 25, 49, 49, 97, 97,193,193,129,135, 30,120,224,128,128,255,255,127,  0,  0,  0,  0,  0,255,255,255,  0,  0,  0,  0, 63, 63,  3,  3, 12, 12, 48, 48,  0,  0,  0,  0, 51, 51, 51, 51, 51, 51, 15, 15,  0,  0, 63, 63,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 48, 48, 63, 63, 48, 48,  0,  0, 12, 12, 51, 51, 51, 51, 51, 51, 63, 63,  0,  0,  0,  0,  0,
-        0,  0,  0,  0, 15, 63,255,248,224,128,  0,  0,  3, 15, 63,127,255,239,207,141, 13, 12, 12, 12, 12, 12, 12, 12, 30,127,225,128,  0,  0,255,255,  0,  0,128,225,127, 30, 12, 12, 12, 12, 12, 12, 12, 13,141,207,239,255,127, 63, 15,  3,  0,  0,128,224,248,255, 63, 15,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-        0,  0,  0,  0,  0,  0,  0,  3,  7, 15, 62,124,248,240,224,192,128,  1,  3,  7, 15, 30, 28, 60, 56,120,112,112,224,224,225,231,254,248,255,255,248,254,231,225,224,224,112,112,120, 56, 60, 28, 30, 15,  7,  3,  1,128,192,224,240,248,124, 62, 15,  7,  3,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-        0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  1,  3,  7, 15, 14, 30, 28, 60, 56,120,112,112,112,224,224,224,224,224,224,224,224,224,224,224,224,224,224,224,224,112,112,112,120, 56, 60, 28, 30, 14, 15,  7,  3,  1,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-    };
-    // clang-format on
-    oled_write_raw_P(kyria_logo, sizeof(kyria_logo));
+    // Write host Keyboard LED Status to OLEDs
+    render_led();
 
 }
 
 void oled_task_user(void) {
-    if (is_keyboard_master()) {
-        render_status();  // Renders the current keyboard state (layer, lock, caps, scroll, etc)
-    } else {
-        render_kyria();
-    }
+  if (is_keyboard_master()) {
+    render_status();  // Renders the current keyboard state (layer, lock, caps, scroll, etc)
+  } else {
+    render_alt();
+  }
 }
 
 #endif
+
+bool encoder_update_user(uint8_t index, bool clockwise) {
+  /* With an if statement we can check which encoder was turned. */
+  if (index == 0) { /* First encoder */
+    if (!clockwise) {
+      tap_code(KC_PGDN);
+    } else {
+      tap_code(KC_PGUP);
+    }
+  } else if (index == 1) { /* Second encoder */
+    if (!clockwise) {
+      tap_code(KC_RGHT);
+    } else {
+      tap_code(KC_LEFT);
+    }
+  }
+	return false;
+}
