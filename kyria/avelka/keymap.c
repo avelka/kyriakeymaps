@@ -15,20 +15,6 @@
  */
 #include QMK_KEYBOARD_H
 
-
-// Left-hand home row mods qwerty
-#define GUI_A LGUI_T(KC_A)
-#define ALT_S LALT_T(KC_S)
-#define SFT_D LSFT_T(KC_D)
-#define CTR_F LCTL_T(KC_F)
-
-// Right-hand home row mods qwerty
-#define CTR_J RCTL_T(KC_J)
-#define SFT_K RSFT_T(KC_K)
-#define ALT_L LALT_T(KC_L)
-#define GUI_SCLN LGUI_T(KC_SCLN)
-
-
 // Left-hand home row mods colemak
 #define GUI_A LGUI_T(KC_A)
 #define CTR_A LCTL_T(KC_A)
@@ -105,14 +91,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_COLEMAK_DH] = LAYOUT(
      KC_ESC  , KC_Q   , KC_W   , KC_F   , KC_P   , KC_B   ,                                      KC_J  , KC_L   , KC_U   , KC_Y   , KC_SCLN, KC_BSPC,
-     KC_TAB  , CTR_A  , ALT_R  , SFT_S  , GIU_T  , KC_G   ,                                      KC_M  , GUI_N  , SFT_E  , ALT_I  , CTR_O  , KC_QUOT,
+     KC_TAB  , CTR_A  , ALT_R   , SFT_S  , GIU_T  , KC_G   ,                                      KC_M  , GUI_N  , SFT_E  , ALT_I  , CTR_O  , KC_QUOT,
      KC_ENT  , KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , KC_LBRC, KC_BSPC, KC_BSPC , KC_RBRC, KC_K  , KC_H   , KC_COMM, KC_DOT , KC_SLSH, KC_ENT ,
                                  ADJUST , NAV    , NUM    , KC_SPC , CODE   , KC_ENT  , KC_RALT, FKEYS , SYM    , KC_LGUI
     ),
 
 		[_COLEMAK_DH_OSX] = LAYOUT(
      KC_ESC  , KC_Q   , KC_W   , KC_F   , KC_P   , KC_B   ,                                      KC_J  , KC_L   , KC_U   , KC_Y   , KC_SCLN, KC_BSPC,
-     KC_TAB  , GUI_A  , ALT_R  , SFT_S  , CTR_T  , KC_G   ,                                      KC_M  , CTR_N  , SFT_E  , ALT_I  , GUI_O  , KC_QUOT,
+     KC_TAB  , GUI_A  , ALT_R   , SFT_S  , CTR_T  , KC_G   ,                                      KC_M  , CTR_N  , SFT_E  , ALT_I  , GUI_O  , KC_QUOT,
      KC_ENT  , KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , KC_LBRC, KC_BSPC, KC_BSPC , KC_RBRC, KC_K  , KC_H   , KC_COMM, KC_DOT , KC_SLSH, KC_ENT ,
                                  ADJUST , NAV    , NUM    , KC_SPC , CODE   , KC_ENT  , KC_RALT, FKEYS , SYM    , KC_LGUI
     ),
@@ -196,9 +182,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_NUM] = LAYOUT(
-      _______, _______, _______, _______, _______, _______,                                     _______, KC_P7, KC_P8, KC_P9, KC_EQL , KC_BSPC,
-      _______, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _______,                                     _______, KC_P4, KC_P5, KC_P6, KC_PLUS,  KC_DEL,
-      _______, _______, _______, _______, _______, _______, _______, KC_SLCK, _______, _______, _______, KC_P1, KC_P2, KC_P3, KC_SLSH,  KC_ENT,
+      _______, _______, _______, _______, _______, _______,                                     KC_P7, KC_P8, KC_P9, _______, KC_EQL , KC_BSPC,
+      _______, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _______,                                     KC_P4, KC_P5, KC_P6, _______, KC_PLUS,  KC_DEL,
+      _______, _______, _______, _______, _______, _______, _______, KC_SLCK, _______, _______, KC_P1, KC_P2, KC_P3, _______, KC_SLSH,  KC_ENT,
                                  _______, _______, _______, _______, _______, KC_NLCK, KC_COMM, KC_P0, KC_DOT,  _______
     ),
 
@@ -308,8 +294,8 @@ static void render_led(void) {
 static void render_alt(void) {
   oled_write_P(qmk_logo, false);
   oled_write_P(PSTR("AvelK\n\n"), false);
-  render_led();
 }
+
 static void render_status(void) {
 
     
