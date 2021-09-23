@@ -62,8 +62,8 @@ enum layers {
 #define ALT_ENT  MT(MOD_LALT, KC_ENT)
 
 
-#define KC_MOR  LCTL(KC_DOT)
-#define KC_LSS  LCTL(KC_COMM)
+#define KC_MOR  LSFT(KC_COMM)
+#define KC_LSS  LSFT(KC_DOT)
 
 
 
@@ -91,18 +91,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_COLEMAK_DH] = LAYOUT(
      KC_ESC  , KC_Q   , KC_W   , KC_F   , KC_P   , KC_B   ,                                      KC_J  , KC_L   , KC_U   , KC_Y   , KC_SCLN, KC_BSPC,
-     KC_TAB  , CTR_A  , ALT_R   , SFT_S  , GIU_T  , KC_G   ,                                      KC_M  , GUI_N  , SFT_E  , ALT_I  , CTR_O  , KC_QUOT,
-     KC_ENT  , KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , KC_LBRC, KC_BSPC, KC_BSPC , KC_RBRC, KC_K  , KC_H   , KC_COMM, KC_DOT , KC_SLSH, KC_ENT ,
-                                 ADJUST , NAV    , NUM    , KC_SPC , CODE   , KC_ENT  , KC_RALT, FKEYS , SYM    , KC_LGUI
+     KC_TAB  , CTR_A  , ALT_R  , SFT_S  , GIU_T  , KC_G   ,                                      KC_M  , GUI_N  , SFT_E  , ALT_I  , CTR_O  , KC_QUOT,
+     KC_ENT  , KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , KC_LBRC, KC_BSPC , FKEYS , KC_RBRC, KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, KC_ENT ,
+                                 ADJUST , NAV    , KC_SPC , NUM    ,  CODE   , KC_ENT, KC_RALT, KC_BSPC, SYM    , KC_LGUI
     ),
 
 		[_COLEMAK_DH_OSX] = LAYOUT(
      KC_ESC  , KC_Q   , KC_W   , KC_F   , KC_P   , KC_B   ,                                      KC_J  , KC_L   , KC_U   , KC_Y   , KC_SCLN, KC_BSPC,
-     KC_TAB  , GUI_A  , ALT_R   , SFT_S  , CTR_T  , KC_G   ,                                      KC_M  , CTR_N  , SFT_E  , ALT_I  , GUI_O  , KC_QUOT,
-     KC_ENT  , KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , KC_LBRC, KC_BSPC, KC_BSPC , KC_RBRC, KC_K  , KC_H   , KC_COMM, KC_DOT , KC_SLSH, KC_ENT ,
-                                 ADJUST , NAV    , NUM    , KC_SPC , CODE   , KC_ENT  , KC_RALT, FKEYS , SYM    , KC_LGUI
+     KC_TAB  , GUI_A  , ALT_R  , SFT_S  , CTR_T  , KC_G   ,                                      KC_M  , CTR_N  , SFT_E  , ALT_I  , GUI_O  , KC_QUOT,
+     KC_ENT  , KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , KC_LBRC, KC_BSPC , FKEYS , KC_RBRC, KC_K  , KC_H   , KC_COMM, KC_DOT , KC_SLSH, KC_ENT ,
+                                 ADJUST , NAV    , KC_SPC , NUM    ,  CODE   , KC_ENT, KC_RALT, KC_BSPC, SYM    , KC_LGUI
     ),
-
 
 
 /*
@@ -165,7 +164,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_ASTR, KC_QUES, KC_BSLS, KC_AMPR, KC_PIPE, KC_SLSH,                                     _______, KC_LCBR, KC_RCBR, _______, _______, KC_BSPC,
       KC_PLUS, KC_EXLM, KC_MOR , KC_MINS, KC_EQL , KC_LSS ,                                     _______, KC_LPRN, KC_RPRN, _______, _______, KC_TAB ,
       KC_HASH, KC_DOT , KC_COLN, KC_UNDS, KC_SCLN, KC_COMM, _______, _______, _______, _______, _______, KC_LBRC, KC_RBRC, _______, _______, KC_ENT ,
-                                 _______, _______, KC_TAB , KC_SPC , _______, _______, _______, _______, _______, _______
+                                 _______, _______, _______, _______, _______, _______, KC_SPC , KC_DLR , _______, _______
     ),
     /*
  * Num Layer: Numbers and symbols
