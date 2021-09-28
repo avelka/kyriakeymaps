@@ -41,5 +41,4 @@
 
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define TAPPING_FORCE_HOLD
-#define RETRO_TAPPING
-#define HOLD_ON_OTHER_KEY_PRESSas
+#define HOLD_ON_OTHER_KEY_PRESS
