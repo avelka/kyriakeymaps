@@ -56,6 +56,12 @@ enum layers {
 #define FKEYS    MO(_FUNCTION)
 #define ADJUST   MO(_ADJUST)
 
+#define SYM_SPC  LT(_SYM, KC_SPC)
+#define NAV_SPC  LT(_NAV, KC_SPC)
+#define COD_SPC  LT(_CODE, KC_SPC)
+#define NUM_SPC  LT(_NUM, KC_SPC)
+#define FUN_SPC  LT(_FUNCTION, KC_SPC)
+
 #define CTL_ESC  MT(MOD_LCTL, KC_ESC)
 #define CTL_QUOT MT(MOD_RCTL, KC_QUOTE)
 #define CTL_MINS MT(MOD_RCTL, KC_MINUS)
@@ -93,32 +99,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
     [_COLEMAK_DH] = LAYOUT(
-     KC_ESC  , KC_Q   , KC_W   , KC_F   , KC_P   , KC_B   ,                                      KC_J  , KC_L   , KC_U   , KC_Y   , KC_SCLN, KC_BSPC,
-     KC_TAB  , CTR_A  , ALT_R  , SFT_S  , GIU_T  , KC_G   ,                                      KC_M  , GUI_N  , SFT_E  , ALT_I  , CTR_O  , KC_QUOT,
-     NAV     , KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , KC_LBRC, KC_ENT , FKEYS , KC_RBRC, KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH,  KC_ENT ,
-                                 ADJUST , NUM    , KC_SPC, KC_SPC  , CODE  , KC_RSFT, KC_RALT , KC_BSPC, SYM    , KC_LGUI
+     KC_ESC  , KC_Q   , KC_W   , KC_F   , KC_P   , KC_B   ,                                     KC_J   , KC_L   , KC_U   , KC_Y   , KC_SCLN, KC_BSPC,
+     KC_TAB  , CTR_A  , ALT_R  , SFT_S  , GIU_T  , KC_G   ,                                     KC_M   , GUI_N  , SFT_E  , ALT_I  , CTR_O  , KC_QUOT,
+     NAV     , KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , KC_LBRC, SH_TG  , SH_TG  , KC_RBRC, KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH,  KC_ENT,
+                                 ADJUST , KC_LSFT, COD_SPC, NUM_SPC, KC_ENT, KC_BSPC , FUN_SPC, SYM_SPC, KC_RALT, KC_LGUI
     ),
 
 		[_COLEMAK_DH_OSX] = LAYOUT(
-     KC_ESC  , KC_Q   , KC_W   , KC_F   , KC_P   , KC_B   ,                                    KC_J  , KC_L   , KC_U   , KC_Y   , KC_SCLN, KC_BSPC,
-     KC_TAB  , GUI_A  , ALT_R  , SFT_S  , CTR_T  , KC_G   ,                                    KC_M  , CTR_N  , SFT_E  , ALT_I  , GUI_O  , KC_QUOT,
-     NAV     , KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , KC_LBRC, KC_ENT , FKEYS , KC_RBRC, KC_K  , KC_H   , KC_COMM, KC_DOT , KC_SLSH,  KC_ENT ,
-                                  ADJUST , NUM    , KC_SPC, KC_SPC  , CODE  , KC_RSFT, KC_RALT , KC_BSPC, SYM    , KC_LGUI
+     KC_ESC  , KC_Q   , KC_W   , KC_F   , KC_P   , KC_B   ,                                     KC_J   , KC_L   , KC_U   , KC_Y   , KC_SCLN, KC_BSPC,
+     KC_TAB  , GUI_A  , ALT_R  , SFT_S  , CTR_T  , KC_G   ,                                     KC_M   , CTR_N  , SFT_E  , ALT_I  , GUI_O  , KC_QUOT,
+     NAV     , KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , KC_LBRC, SH_TG  , SH_TG  , KC_RBRC, KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH,  KC_ENT ,
+                                 ADJUST , KC_LSFT, COD_SPC, NUM_SPC, KC_ENT, KC_BSPC , FUN_SPC, SYM_SPC, KC_RALT, KC_LGUI
     ),
 
     [_NAV] = LAYOUT(
-      _______, _______, _______, _______, _______, _______,                                     KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_VOLU, KC_DEL,
-      _______, KC_LCTL, KC_LALT, KC_LSFT, KC_LGUI, _______,                                     KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_VOLD, KC_INS,
+      _______, _______, _______, _______, _______, _______,                                     KC_PGUP , KC_HOME, KC_UP,   KC_END,  KC_VOLU, KC_DEL,
+      _______, KC_LCTL, KC_LALT, KC_LSFT, KC_LGUI, _______,                                     KC_PGDN , KC_LEFT, KC_DOWN, KC_RGHT, KC_VOLD, KC_INS,
       _______, _______, _______, _______, _______, _______, _______, KC_SLCK, _______, _______, KC_PAUSE, KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE, KC_PSCR,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 
 
     [_NUM] = LAYOUT(
-      _______, _______, _______, _______, _______, _______,                                     _______, KC_P7 , KC_P8, KC_P9, KC_EQL , KC_BSPC,
-      _______, KC_LCTL, KC_LALT, KC_LSFT, KC_LGUI, _______,                                     _______, KC_P4 , KC_P5, KC_P6, KC_PLUS,  KC_DEL,
-      _______, _______, _______, _______, _______, _______, _______, KC_SLCK, _______, _______, _______, KC_P1 , KC_P2, KC_P3, KC_SLSH,  KC_ENT,
-                                 _______, _______, _______, _______, _______, KC_NLCK, KC_COMM, KC_P0  , KC_DOT,  _______
+      _______, _______, _______, _______, _______, _______,                                     KC_BSLS, KC_P7 , KC_P8, KC_P9, KC_EQL , KC_BSPC,
+      _______, KC_LCTL, KC_LALT, KC_LSFT, KC_LGUI, _______,                                     KC_AMPR, KC_P4 , KC_P5, KC_P6, KC_PLUS,  KC_DEL,
+      _______, _______, _______, _______, _______, _______, _______, KC_SLCK, _______, _______, KC_UNDS, KC_P1 , KC_P2, KC_P3, KC_SLSH,  KC_ENT,
+                                 _______, _______, _______, _______, _______, KC_NLCK, KC_MINS, KC_P0  , KC_DOT,  _______
     ),
     
     [_FUNCTION] = LAYOUT(
@@ -131,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_SYM] = LAYOUT(
-     KC_GRV  ,   KC_1 ,   KC_2 ,   KC_3 ,   KC_4 ,   KC_5 ,                                       KC_6 ,   KC_7 ,   KC_8 ,   KC_9 ,   KC_0 , KC_EQL ,
+     KC_GRV  ,   KC_1 ,   KC_2 ,   KC_3 ,   KC_4 ,   KC_5 ,                                       KC_6 ,   KC_7 ,   KC_8 ,   KC_9 ,   KC_0 , KC_DEL ,
      KC_TILD , KC_EXLM,  KC_AT , KC_HASH,  KC_DLR, KC_PERC,                                     KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PLUS,
      KC_PIPE , KC_BSLS, KC_COLN, KC_SCLN, KC_MINS, KC_LBRC, KC_LCBR, _______, _______, KC_RCBR, KC_RBRC, KC_UNDS, KC_COMM,  KC_DOT, KC_SLSH, KC_QUES,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
@@ -166,12 +172,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef OLED_ENABLE
 
 
-static const char PROGMEM qmk_logo[] = {
-  0x80,0x81,0x82,0x83,0x84,0x85,0x86,0x87,0x88,0x89,0x8a,0x8b,0x8c,0x8d,0x8e,0x8f,0x90,0x91,0x92,0x93,0x94,
-  0xa0,0xa1,0xa2,0xa3,0xa4,0xa5,0xa6,0xa7,0xa8,0xa9,0xaa,0xab,0xac,0xad,0xae,0xaf,0xb0,0xb1,0xb2,0xb3,0xb4,
-  0xc0,0xc1,0xc2,0xc3,0xc4,0xc5,0xc6,0xc7,0xc8,0xc9,0xca,0xcb,0xcc,0xcd,0xce,0xcf,0xd0,0xd1,0xd2,0xd3,0xd4,0
-};
-
 static void render_led(void) {
   led_t led_usb_state = host_keyboard_led_state();
   oled_write_P(led_usb_state.num_lock    ? PSTR("NUMLCK ") : PSTR("       "), false);
@@ -179,16 +179,11 @@ static void render_led(void) {
   oled_write_P(led_usb_state.scroll_lock ? PSTR("SCRLCK ") : PSTR("       "), false);
 }
 
-static void render_alt(void) {
-  oled_write_P(qmk_logo, false);
-  oled_write_P(PSTR("AvelK\n\n"), false);
-}
-
 static void render_status(void) {
 
     
     // clang-format on
-    oled_write_P(qmk_logo, false);
+  
     oled_write_P(PSTR("Kyria\n\n"), false);
     // Host Keyboard Layer Status
   
@@ -231,11 +226,7 @@ static void render_status(void) {
 }
 
 void oled_task_user(void) {
-  if (is_keyboard_master()) {
     render_status();  // Renders the current keyboard state (layer, lock, caps, scroll, etc)
-  } else {
-    render_alt();
-  }
 }
 
 #endif
@@ -250,7 +241,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
       tap_code(KC_PGUP);
     }
   } else if (index == 1) { /* Second encoder */
-    if (layer_state_is(_NUM) || layer_state_is(_NAV) ) {
+  if (layer_state_is(_NUM) || layer_state_is(_NAV)  || layer_state_is(_CODE) ) {
        if (!clockwise) {
         tap_code(KC_UP);
       } else {
