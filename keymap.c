@@ -78,7 +78,6 @@ enum layers {
 
 #define KC_MOR  LSFT(KC_COMM)
 #define KC_LSS  LSFT(KC_DOT)
-#define KC_COLN  LSFT(KC_SCLN)
 #define KC_SQOT  LSFT(KC_QUOT)
 
 
@@ -138,12 +137,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_NUML] = LAYOUT(
-      _______, KC_EQL , KC_P7  , KC_P8  , KC_P9  , KC_BSLS,                                     _______, _______, _______, _______, _______, _______,                                     
-      _______, KC_PLUS, KC_P4  , KC_P5  , KC_P6  , KC_AMPR,                                     _______, KC_RGUI, OSM_SFT, KC_LALT, KC_RCTL, _______,                                     
-      _______, KC_SLSH, KC_P1  , KC_P2  , KC_P3  , KC_UNDS, _______, KC_SLCK, KC_NLCK, _______, _______, _______, _______, _______, _______, _______,  
+      _______, KC_EQL , KC_P7  , KC_P8  , KC_P9  , KC_BSLS,                                     _______, _______, _______, _______, _______, _______,
+      _______, KC_PLUS, KC_P4  , KC_P5  , KC_P6  , KC_AMPR,                                     _______, KC_RGUI, OSM_SFT, KC_LALT, KC_RCTL, _______,
+      _______, KC_SLSH, KC_P1  , KC_P2  , KC_P3  , KC_UNDS, _______, KC_SLCK, KC_NLCK, _______, _______, _______, _______, _______, _______, _______,
                                  _______, KC_DOT , KC_P0  , KC_MINS, KC_SPC , _______, XXXXXXX, _______, _______,  _______
     ),
-    
+
     [_FUNCTION] = LAYOUT(
       _______,  KC_F9 ,  KC_F10,  KC_F11,  KC_F12, _______,                                     _______, _______, _______, _______, _______, _______,
       _______,  KC_F5 ,  KC_F6 ,  KC_F7 ,  KC_F8 , _______,                                     _______, KC_RGUI, OSM_SFT, KC_LALT, KC_RCTL, _______,
@@ -154,7 +153,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_CODE] = LAYOUT(
       _______, KC_ASTR, KC_QUES, KC_EQL , KC_HASH, KC_TILD,                                     KC_GRV , KC_LCBR, KC_SLSH, KC_RCBR, KC_SCLN, KC_BSPC,
-      _______, KC_EXLM, KC_MOR , KC_MINS, KC_LSS , KC_PERC,                                     KC_SQOT, KC_LPRN, KC_PIPE, KC_RPRN, KC_COLN, KC_DEL ,
+      _______, KC_EXLM, KC_MOR , KC_MINS, KC_LSS , KC_PERC,                                     KC_SQOT, KC_LPRN, KC_PIPE, KC_RPRN, KC_COLON, KC_DEL ,
       _______, KC_AT  , KC_PLUS, KC_UNDS, KC_COMM, KC_CIRC, KC_AMPR, _______, KC_NLCK, KC_DOT , KC_QUOT, KC_LBRC, KC_BSLS, KC_RBRC, KC_COMM, KC_ENT ,
                                  _______, _______, _______, XXXXXXX, _______, KC_P0  , KC_MINS, KC_DLR , OSM_ALT,  _______
     ),
@@ -189,19 +188,19 @@ static void render_led(void) {
 
 static void render_status(void) {
 
-    
+
     // clang-format on
-  
+
     oled_write_P(PSTR("Kyria\n\n"), false);
     // Host Keyboard Layer Status
-  
+
     oled_write_P(PSTR("Layer: "), false);
     switch (get_highest_layer(layer_state | default_layer_state)) {
         case _COLEMAK_DH:
             oled_write_P(PSTR("Cmk-DH Lnx/win\n"), false);
             break;
 				case _COLEMAK_DH_OSX:
-            oled_write_P(PSTR("Cmk-dh OsX\n"), false); 
+            oled_write_P(PSTR("Cmk-dh OsX\n"), false);
             break;
         case _NAV:
             oled_write_P(PSTR("Nav\n"), false);
@@ -233,8 +232,9 @@ static void render_status(void) {
 
 }
 
-void oled_task_user(void) {
+bool oled_task_user(void) {
     render_status();  // Renders the current keyboard state (layer, lock, caps, scroll, etc)
+    return false;
 }
 
 #endif
@@ -242,7 +242,7 @@ void oled_task_user(void) {
 bool encoder_update_user(uint8_t index, bool clockwise) {
   /* With an if statement we can check which encoder was turned. */
   if (index == 0) { /* First encoder */
-   
+
     if (!clockwise) {
       tap_code(KC_PGDN);
     } else {
