@@ -1,19 +1,3 @@
-/* Copyright 2019 Thomas Baart <thomas@splitkb.com>
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-#include QMK_KEYBOARD_H
 
 // Left-hand home row mods colemak
 #define GUI_A LGUI_T(KC_A)
@@ -114,7 +98,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 ADJUST , OSM_CTL, COD_SPC, NBR_SPC , OSM_SFT, OSM_GUI , FUN_SPC, NBL_SPC, OSM_ALT, OSM_GUI
     ),
 
-		[_COLEMAK_DH_OSX] = LAYOUT(
+	[_COLEMAK_DH_OSX] = LAYOUT(
      KC_ESC  , KC_Q   , KC_W   , KC_F   , KC_P   , KC_B   ,                                     KC_J   , KC_L   , KC_U   , KC_Y   , KC_SCLN, KC_BSPC,
      KC_TAB  , GUI_A  , ALT_R  , SFT_S  , CTR_T  , KC_G   ,                                     KC_M   , CTR_N  , SFT_E  , ALT_I  , GUI_O  , KC_QUOT,
      NAV_ENT , KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , KC_LBRC, SH_TG  , SH_TG  , KC_RBRC, KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH,  KC_ENT ,
@@ -123,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NAV] = LAYOUT(
       _______, _______, _______, _______, _______, _______,                                     KC_PGUP , KC_HOME, KC_UP,   KC_END,  KC_VOLU, KC_BSPC,
-      _______, KC_LCTL, KC_LALT, OSM_SFT, KC_LGUI, _______,                                     KC_PGDN , KC_LEFT, KC_DOWN, KC_RGHT, KC_VOLD, KC_DEL ,
+      _______, KC_LGUI, KC_LALT, OSM_SFT, KC_LCTL, _______,                                     KC_PGDN , KC_LEFT, KC_DOWN, KC_RGHT, KC_VOLD, KC_DEL ,
       XXXXXXX, _______, _______, _______, _______, _______, _______, KC_SLCK, _______, KC_PSCR, KC_PAUSE, KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE, KC_ENT,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
@@ -131,21 +115,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NUMR] = LAYOUT(
       _______, _______, _______, _______, _______, _______,                                     KC_BSLS, KC_P7 , KC_P8, KC_P9, KC_EQL , KC_BSPC,
-      _______, KC_LCTL, KC_LALT, OSM_SFT, KC_LGUI, _______,                                     KC_AMPR, KC_P4 , KC_P5, KC_P6, KC_PLUS, KC_DEL,
+      _______, KC_LGUI, KC_LALT, OSM_SFT, KC_LCTL, _______,                                     KC_AMPR, KC_P4 , KC_P5, KC_P6, KC_PLUS, KC_DEL,
       _______, _______, _______, _______, _______, _______, _______, KC_SLCK, KC_NLCK, _______, KC_UNDS, KC_P1 , KC_P2, KC_P3, KC_SLSH, KC_ENT,
                                  _______, _______, _______, XXXXXXX, _______, KC_SPC , KC_MINS, KC_P0  , KC_DOT,  _______
     ),
 
     [_NUML] = LAYOUT(
       _______, KC_EQL , KC_P7  , KC_P8  , KC_P9  , KC_BSLS,                                     _______, _______, _______, _______, _______, _______,
-      _______, KC_PLUS, KC_P4  , KC_P5  , KC_P6  , KC_AMPR,                                     _______, KC_RGUI, OSM_SFT, KC_LALT, KC_RCTL, _______,
+      _______, KC_PLUS, KC_P4  , KC_P5  , KC_P6  , KC_AMPR,                                     _______, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, _______,
       _______, KC_SLSH, KC_P1  , KC_P2  , KC_P3  , KC_UNDS, _______, KC_SLCK, KC_NLCK, _______, _______, _______, _______, _______, _______, _______,
                                  _______, KC_DOT , KC_P0  , KC_MINS, KC_SPC , _______, XXXXXXX, _______, _______,  _______
     ),
 
     [_FUNCTION] = LAYOUT(
       _______,  KC_F9 ,  KC_F10,  KC_F11,  KC_F12, _______,                                     _______, _______, _______, _______, _______, _______,
-      _______,  KC_F5 ,  KC_F6 ,  KC_F7 ,  KC_F8 , _______,                                     _______, KC_RGUI, OSM_SFT, KC_LALT, KC_RCTL, _______,
+      _______,  KC_F5 ,  KC_F6 ,  KC_F7 ,  KC_F8 , _______,                                     _______, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, _______,
       _______,  KC_F1 ,  KC_F2 ,  KC_F3 ,  KC_F4 , _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
                                  _______, _______, _______, _______, _______, _______, XXXXXXX, _______, _______, _______
     ),
@@ -168,10 +152,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_GAMING] = LAYOUT(
-      KC_ESC ,   KC_1 ,   KC_2 ,  KC_3  ,  KC_4  ,  KC_5 ,                                     _______, _______, _______, _______, _______, COLEMAK,
-      KC_TAB , OSM_SFT,   KC_A ,  KC_W  ,  KC_D  ,  KC_Q ,                                     _______, _______, _______, _______, _______, CMK_OSX,
-      KC_ENT , KC_LCTL,   KC_X ,  KC_S  ,  KC_E  ,  KC_M ,   KC_F , KC_ENT , _______, _______, _______, _______, _______, _______, _______, KC_ENT ,
-                                  ADJUST , OSM_CTL, COD_SPC, NBR_SPC , OSM_SFT, OSM_GUI , FUN_SPC, NBL_SPC, OSM_ALT, OSM_GUI
+      KC_ESC ,   KC_1 ,   KC_2 ,  KC_3  ,  KC_4  ,  KC_5 ,                                     KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , COLEMAK,
+      KC_TAB , KC_LSFT,   KC_A ,  KC_W  ,  KC_D  ,  KC_Q ,                                     _______, _______, _______, _______, _______, CMK_OSX,
+      KC_ENT , KC_LCTL,   KC_X ,  KC_S  ,  KC_E  ,  KC_M , KC_F , KC_ENT , _______, _______, _______, _______, _______, _______, _______, KC_ENT ,
+                                  ADJUST , KC_LCTL, KC_SPC, KC_SPC , KC_LGUI, OSM_GUI , FUN_SPC, NBL_SPC, OSM_ALT, OSM_GUI
     ),
 
 };
