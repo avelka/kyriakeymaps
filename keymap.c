@@ -1,4 +1,6 @@
 
+#include QMK_KEYBOARD_H
+
 // Left-hand home row mods colemak
 #define GUI_A LGUI_T(KC_A)
 #define CTR_A LCTL_T(KC_A)
@@ -16,8 +18,8 @@
 #define CTR_O LCTL_T(KC_O)
 
 enum layers {
-    _COLEMAK_DH,
     _COLEMAK_DH_OSX,
+    _COLEMAK_DH,
     _NAV,
     _FUNCTION,
     _ADJUST,
