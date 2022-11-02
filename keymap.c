@@ -2,20 +2,24 @@
 #include QMK_KEYBOARD_H
 
 // Left-hand home row mods colemak
-#define GUI_A LGUI_T(KC_A)
-#define CTR_A LCTL_T(KC_A)
-#define ALT_R LALT_T(KC_R)
-#define SFT_S LSFT_T(KC_S)
+#define GUI_A LGUI_T(KC_A) // osx
+#define CTR_A LCTL_T(KC_A) // lnx/win
+
+#define ALT_R LALT_T(KC_R) // osx
+#define SFT_S LSFT_T(KC_S) // lnx/win
+
 #define CTR_T LCTL_T(KC_T)
 #define GIU_T LGUI_T(KC_T)
 
 // Right-hand home row mods colemak
-#define CTR_N RCTL_T(KC_N)
-#define GUI_N LGUI_T(KC_N)
+#define CTR_N RCTL_T(KC_N) // osx
+#define GUI_N RGUI_T(KC_N) // lnx/win
+
 #define SFT_E RSFT_T(KC_E)
-#define ALT_I LALT_T(KC_I)
-#define GUI_O LGUI_T(KC_O)
-#define CTR_O LCTL_T(KC_O)
+#define ALT_I RALT_T(KC_I)
+
+#define GUI_O RGUI_T(KC_O) // osx
+#define CTR_O RCTL_T(KC_O) // lnx/win
 
 enum layers {
     _COLEMAK_DH_OSX,
