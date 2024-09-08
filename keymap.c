@@ -30,6 +30,7 @@ enum layers {
     _NUMR,
     _NUML,
     _GAMING,
+    _GAMING_A,
     _CODE
 };
 
@@ -46,6 +47,7 @@ enum layers {
 #define NUM_L    MO(_NUML)
 #define FKEYS    MO(_FUNCTION)
 #define ADJUST   MO(_ADJUST)
+#define GAMING_A   MO(_GAMING_A)
 
 #define NAV_ENT  LT(_NAV, KC_ENT)
 #define COD_SPC  LT(_CODE, KC_SPC)
@@ -104,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 ADJUST , OSM_CTL, COD_SPC, NBR_SPC , OSM_SFT, OSM_GUI , FUN_SPC, NBL_SPC, OSM_ALT, OSM_GUI
     ),
 
-	[_COLEMAK_DH_OSX] = LAYOUT(
+	  [_COLEMAK_DH_OSX] = LAYOUT(
      KC_ESC  , KC_Q   , KC_W   , KC_F   , KC_P   , KC_B   ,                                     KC_J   , KC_L   , KC_U   , KC_Y   , KC_SCLN, KC_BSPC,
      KC_TAB  , GUI_A  , ALT_R  , SFT_S  , CTR_T  , KC_G   ,                                     KC_M   , CTR_N  , SFT_E  , ALT_I  , GUI_O  , KC_QUOT,
      NAV_ENT , KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , KC_LBRC, SH_TG  , SH_TG  , KC_RBRC, KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH,  KC_ENT ,
@@ -161,9 +163,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_ESC ,   KC_1 ,   KC_2 ,  KC_3  ,  KC_4  ,  KC_5 ,                                     KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , COLEMAK,
       KC_TAB , KC_LSFT,   KC_A ,  KC_W  ,  KC_D  ,  KC_Q ,                                     _______, _______, _______, _______, _______, CMK_OSX,
       KC_ENT , KC_LCTL,   KC_X ,  KC_S  ,  KC_E  ,  KC_M , KC_F , KC_ENT , _______, _______, _______, _______, _______, _______, _______, KC_ENT ,
-                                  ADJUST , KC_LCTL, KC_SPC, KC_SPC , KC_LGUI, OSM_GUI , FUN_SPC, NBL_SPC, OSM_ALT, OSM_GUI
+                                  ADJUST , GAMING_A, KC_SPC, KC_LALT, KC_LGUI, _______ , _______, _______, _______, _______
     ),
-
+    [_GAMING_A] = LAYOUT(
+      KC_ESC ,  KC_6  ,  KC_7 ,  KC_8  ,  KC_9  ,  KC_0  ,                                     KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , COLEMAK,
+      KC_TAB , KC_F6  , KC_F7 , KC_F8  ,  KC_F9 , KC_F10 ,                                   _______, _______, _______, _______, _______, CMK_OSX,
+      KC_ENT , KC_F1  , KC_F2 , KC_F3  ,  KC_F4 ,  KC_F5 , KC_F , KC_ENT , _______, _______, _______, _______, _______, _______, _______, KC_ENT ,
+                                  ADJUST , _______, KC_SPC, KC_SPC , KC_LGUI, _______ , _______, _______, _______, _______
+    ),
 };
 
 #ifdef OLED_ENABLE
@@ -209,6 +216,9 @@ static void render_status(void) {
             break;
 				case _GAMING:
             oled_write_P(PSTR("Gaming\n"), false);
+            break;
+        case _GAMING_A
+            oled_write_P(PSTR("Gaming Alt\n "), false);
             break;
         case _CODE:
           oled_write_P(PSTR("Code\n"), false);
