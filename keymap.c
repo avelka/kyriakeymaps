@@ -163,13 +163,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_ESC ,   KC_1 ,   KC_2 ,  KC_3  ,  KC_4  ,  KC_5 ,                                     KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , COLEMAK,
       KC_TAB , KC_LSFT,   KC_A ,  KC_W  ,  KC_D  ,  KC_Q ,                                     _______, _______, _______, _______, _______, CMK_OSX,
       KC_ENT , KC_LCTL,   KC_X ,  KC_S  ,  KC_E  ,  KC_M , KC_F , KC_ENT , _______, _______, _______, _______, _______, _______, _______, KC_ENT ,
-                                  ADJUST , GAMING_A, KC_SPC, KC_LALT, KC_LGUI, _______ , _______, _______, _______, _______
+                                  ADJUST , GAMING_A, KC_SPC, KC_LALT, XXXXXXX, _______ , _______, _______, _______, _______
     ),
     [_GAMING_A] = LAYOUT(
       KC_ESC ,  KC_6  ,  KC_7 ,  KC_8  ,  KC_9  ,  KC_0  ,                                     KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , COLEMAK,
       KC_TAB , KC_F6  , KC_F7 , KC_F8  ,  KC_F9 , KC_F10 ,                                   _______, _______, _______, _______, _______, CMK_OSX,
       KC_ENT , KC_F1  , KC_F2 , KC_F3  ,  KC_F4 ,  KC_F5 , KC_F , KC_ENT , _______, _______, _______, _______, _______, _______, _______, KC_ENT ,
-                                  ADJUST , _______, KC_SPC, KC_SPC , KC_LGUI, _______ , _______, _______, _______, _______
+                                  ADJUST , _______, KC_SPC, KC_SPC , XXXXXXX, _______ , _______, _______, _______, _______
     ),
 };
 
